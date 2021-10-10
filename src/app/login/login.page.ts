@@ -17,10 +17,17 @@ export class LoginPage implements OnInit {
     
   }
 
-  signInUser(){
-    console.log(this.authService.userData.uid)
-    this.authService.signIn("isabellaketley@gmail.com", "password");
-    this.router.navigate(['/navigation'])
+  async signInUser(){
+    //console.log(this.authService.userData.uid)
+    await this.authService.signIn("isabellaketley@gmail.com", "password");
+    console.log("logged in");
+    this.router.navigate(['/tabs'])
+  }
+
+  async signOutUser(){
+    //console.log(this.authService.userData.uid)
+    await this.authService.signoutUser();
+    this.router.navigate(['/tabs'])
   }
 
 }

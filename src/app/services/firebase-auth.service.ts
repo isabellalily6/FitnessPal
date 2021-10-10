@@ -14,6 +14,7 @@ export class FirebaseAuthService {
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe(user => {
       if (user) {
+        console.log("getting there")
         this.userData = user;
         console.log(user)
       } else {
@@ -27,6 +28,7 @@ export class FirebaseAuthService {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         const user = result.user;
+        this.userData = user;
         const userRef = this.fireStore.doc(`users/${user.uid}`);
         userRef.set({
           uid: user.uid,
@@ -41,7 +43,10 @@ export class FirebaseAuthService {
   signIn(email, password) {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
+        console.log("update data");
+        this.userData = result.user;
         console.log(result.user.uid)
+        console.log("done");
       }).catch((error) => {
         window.alert(error.message)
       })
@@ -68,6 +73,7 @@ export class FirebaseAuthService {
 
   // Returns true when user is looged in and email is verified
 get isLoggedIn(): boolean {
+  console.log(this.userData);
   return (this.userData !== null) ? true : false;
 }
 
