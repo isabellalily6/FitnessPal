@@ -3,7 +3,9 @@ import {FirebaseAuthService} from '../services/firebase-auth.service'
 
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
+
+//code used from https://www.youtube.com/watch?v=RuuOdfz9Kxc&ab_channel=SimonGrimm
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,7 @@ export class LoginPage implements OnInit {
     private authService: FirebaseAuthService, 
     private router: Router,
     private fb: FormBuilder,
-    private loadingController: LoadingController,
+    private loadingController: LoadingController
     ) {
    }
 
@@ -46,9 +48,9 @@ export class LoginPage implements OnInit {
       loading.dismiss();
       this.router.navigate(['/tabs'])
     })
-    .catch((error) => {
+    .catch(() => {
       loading.dismiss();
-      window.alert(error.message)
+      window.alert("The Login Failed")
     })
   }
 
