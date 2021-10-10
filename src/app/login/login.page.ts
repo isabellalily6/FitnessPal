@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FirebaseAuthService} from '../services/firebase-auth.service'
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -8,7 +10,7 @@ import {FirebaseAuthService} from '../services/firebase-auth.service'
 })
 export class LoginPage implements OnInit {
 
-  constructor(public authService: FirebaseAuthService) {
+  constructor(public authService: FirebaseAuthService, private router: Router) {
    }
 
   ngOnInit() {
@@ -16,13 +18,9 @@ export class LoginPage implements OnInit {
   }
 
   signInUser(){
-    this.authService.signIn("isabellaketley@gmail.com", "password")
-    .then((response) => {
-      console.log(response)
-      console.log(this.authService.userDetails())
-    }, error => {
-      console.log("error")
-    })
+    console.log(this.authService.userData.uid)
+    this.authService.signIn("isabellaketley@gmail.com", "password");
+    this.router.navigate(['/navigation'])
   }
 
 }
