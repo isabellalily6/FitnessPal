@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FirebaseAuthService} from '../services/firebase-auth.service'
 
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -9,19 +11,45 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  credentials: FormGroup;
 
-  constructor(public authService: FirebaseAuthService, private router: Router) {
+  constructor(
+    private authService: FirebaseAuthService, 
+    private router: Router,
+    private fb: FormBuilder,
+    private loadingController: LoadingController,
+    ) {
    }
 
   ngOnInit() {
-    
+    this.credentials = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]]
+    })
   }
 
-  async signInUser(){
+  get email(){
+    return this.credentials.get('email');
+  }
+
+  get password(){
+    return this.credentials.get('password');
+  }
+
+  async login(){
+    const loading = await this.loadingController.create();
+    await loading.present();
+
     //console.log(this.authService.userData.uid)
-    await this.authService.signIn("isabellaketley@gmail.com", "password");
-    console.log("logged in");
-    this.router.navigate(['/tabs'])
+    await this.authService.signIn(this.credentials.value)
+    .then(() => {
+      loading.dismiss();
+      this.router.navigate(['/tabs'])
+    })
+    .catch((error) => {
+      loading.dismiss();
+      window.alert(error.message)
+    })
   }
 
   async signOutUser(){

@@ -9,7 +9,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class FirebaseAuthService {
   userData: any = null; // Save logged in user data
 
-  constructor(private afAuth: AngularFireAuth, private fireStore: AngularFirestore) { 
+  constructor(private afAuth: AngularFireAuth, private fireStore: AngularFirestore) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe(user => {
@@ -40,15 +40,13 @@ export class FirebaseAuthService {
       })
   }
 
-  signIn(email, password) {
-    return this.afAuth.signInWithEmailAndPassword(email, password)
+  signIn(value) {
+    return this.afAuth.signInWithEmailAndPassword(value.email, value.password)
       .then((result) => {
         console.log("update data");
         this.userData = result.user;
         console.log(result.user.uid)
         console.log("done");
-      }).catch((error) => {
-        window.alert(error.message)
       })
   }
 
@@ -67,14 +65,10 @@ export class FirebaseAuthService {
     })
   }
 
-  userDetails() {
-    return this.afAuth.user
-  }
-
   // Returns true when user is looged in and email is verified
-get isLoggedIn(): boolean {
-  console.log(this.userData);
-  return (this.userData !== null) ? true : false;
-}
+  get isLoggedIn(): boolean {
+    console.log(this.userData);
+    return (this.userData !== null) ? true : false;
+  }
 
 }

@@ -12,15 +12,6 @@ export class Tab1Page {
   constructor(public authService: FirebaseAuthService) {}
 
   ngOnInit() {
-    this.authService.userDetails().subscribe(response => {
-      if (response !== null) {
-        this.userDetail = response.email;
-      } else {
-        console.log("no user info")
-      }
-    }, error => {
-      console.log(error);
-    })
   }
 
 }
