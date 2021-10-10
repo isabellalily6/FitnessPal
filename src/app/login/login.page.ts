@@ -20,8 +20,7 @@ export class LoginPage implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private loadingController: LoadingController
-    ) {
-   }
+    ) {}
 
   ngOnInit() {
     this.credentials = this.fb.group({
@@ -50,7 +49,7 @@ export class LoginPage implements OnInit {
     })
     .catch(() => {
       loading.dismiss();
-      window.alert("The Login Failed")
+      window.alert("Login Failed")
     })
   }
 
