@@ -24,19 +24,18 @@ export class FirebaseAuthService {
   }
 
   // Sign up with email/password
-  SignUp(email, password) {
-    return this.afAuth.createUserWithEmailAndPassword(email, password)
+  SignUp(value) {
+    return this.afAuth.createUserWithEmailAndPassword(value.email, value.password)
       .then((result) => {
         const user = result.user;
         this.userData = user;
         const userRef = this.fireStore.doc(`users/${user.uid}`);
         userRef.set({
           uid: user.uid,
-          name: 'Isabella Ketley',
+          firstName: value.firstName,
+          lastName: value.lastName,
           email: user.email,
         })
-      }).catch((error) => {
-        window.alert(error.message)
       })
   }
 
