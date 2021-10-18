@@ -33,9 +33,10 @@ export class Tab3Page {
     this.showMap();
   }
 
-  showMap() {
-    let latLng = new google.maps.LatLng(51.9036442, 7.6673267);
- 
+  async showMap() {
+    const coordinates = await Geolocation.getCurrentPosition();
+    let latLng = new google.maps.LatLng(coordinates.coords.latitude, coordinates.coords.longitude);
+
     let mapOptions = {
       center: latLng,
       zoom: 15,
