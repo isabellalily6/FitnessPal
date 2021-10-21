@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 
 import { Geolocation } from '@capacitor/geolocation';
+import {FirebaseAuthService} from '../services/firebase-auth.service'
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -22,7 +23,9 @@ export class Tab3Page {
     isTracking: boolean = false;
     watch: any;
 
-  constructor() {}
+  constructor(
+    private authService: FirebaseAuthService, 
+  ) {}
 
   ionViewDidEnter(){
     this.showMap();
@@ -67,9 +70,21 @@ export class Tab3Page {
   stopTracking(){
     Geolocation.clearWatch(this.watch).then(() => {
       let path = this.poly.getPath();
-
+      let lats = [];
+      let lngs = [];
       //console.log(path.pop().lat())
       this.isTracking = false;
+
+      while(path.getLength() != 0){
+        let tempPath = path.pop();
+        lats.push(tempPath.lat())
+        lngs.push(tempPath.lng())
+      }
+
+      console.log(lats);
+      console.log(lngs)
+      this.authService.addNewTrack(lats, lngs);
+
     })
   }
 
