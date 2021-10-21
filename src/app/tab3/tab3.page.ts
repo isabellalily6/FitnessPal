@@ -55,7 +55,6 @@ export class Tab3Page {
 
     this.watch = Geolocation.watchPosition({}, (position, error) => {
       if(position && this.isTracking){
-        console.log("test")
         this.addNewPosition(
           position.coords.latitude,
           position.coords.longitude,
@@ -67,18 +66,16 @@ export class Tab3Page {
 
   stopTracking(){
     Geolocation.clearWatch(this.watch).then(() => {
-      console.log("hello");
       let path = this.poly.getPath();
-      console.log(path);
-      console.log("hello");
-      console.log(path.pop().lat())
+
+      //console.log(path.pop().lat())
       this.isTracking = false;
     })
   }
 
   addNewPosition(lat, lng, time){
     let pos = new google.maps.LatLng(lat, lng);
-    console.log("test1")
+
     const path = this.poly.getPath();
 
     path.push(pos);
