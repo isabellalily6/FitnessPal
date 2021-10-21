@@ -14,10 +14,6 @@ declare var google;
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-  locations: Observable<any>;
-  locationsCollection: AngularFirestoreCollection<any>;
-
-    // Map related
     @ViewChild('map') mapElement: ElementRef;
     map: any;
     poly: any;
@@ -54,22 +50,6 @@ export class Tab3Page {
     this.poly.setMap(this.map);
   }
 
-  updateMap(locations){
-    this.markers.map(marker => marker.setMap(null));
-    this.markers = [];
-
-    for (let loc of locations){
-      let pos = new google.maps.LatLng(loc.lat, loc.lng);
-
-      let marker = new google.maps.Marker({
-        position: pos,
-        animation: google.maps.Animation.DROP,
-        map: this.map
-      });
-      this.markers.push(marker);
-    }
-  }
-
   startTracking(){
     this.isTracking = true;
 
@@ -83,14 +63,15 @@ export class Tab3Page {
         )
       }
     })
-    console.log(this.watch)
   }
 
   stopTracking(){
-    console.log(this.watch)
     Geolocation.clearWatch(this.watch).then(() => {
-      console.log(this.watch)
       console.log("hello");
+      let path = this.poly.getPath();
+      console.log(path);
+      console.log("hello");
+      console.log(path.pop().lat())
       this.isTracking = false;
     })
   }
@@ -101,13 +82,5 @@ export class Tab3Page {
     const path = this.poly.getPath();
 
     path.push(pos);
-
-    new google.maps.Marker({
-      position: pos,
-      title: "#" + path.getLength(),
-      map: this.map,
-    });
-
   }
-
 }
