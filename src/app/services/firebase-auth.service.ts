@@ -85,7 +85,18 @@ export class FirebaseAuthService {
 
     return collectionRef.snapshotChanges();
   }
-  
+
+  getweeklyTracks(){
+    let weekago = new Date();
+    weekago.setDate(weekago.getDate()-7)
+    console.log(weekago)
+    const collectionRef: AngularFirestoreCollection<any> = this.fireStore.collection(`users/${this.userData.uid}/tracks/`, ref => ref
+    .orderBy("times.startTime")
+    .startAt(weekago)
+    .endAt(new Date()))
+
+    return collectionRef.snapshotChanges();
+  }
 
 
   // Returns true when user is looged in and email is verified
