@@ -23,7 +23,8 @@ const routes: Routes = [
   },
   {
     path: 'track-summary',
-    loadChildren: () => import('./track-summary/track-summary.module').then( m => m.TrackSummaryPageModule)
+    loadChildren: () => import('./track-summary/track-summary.module').then( m => m.TrackSummaryPageModule),
+    canLoad: [AuthGuard]
   },
 ];
 @NgModule({
