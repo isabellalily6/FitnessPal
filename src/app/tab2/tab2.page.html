@@ -7,11 +7,18 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card *ngFor="let item of activitiesData">
+    <ion-card-header>
+      <ion-card-title> {{ item.times.startTime }} </ion-card-title>
+      <ion-card-content>
+        Distance: {{item.distance | number : '1.2-2'}}m <br/>
+        Total Time: {{item.times.timeDiff}} <br/>
+        Average Speed: {{item.speed | number : '1.2-2'}}m/s <br/>
+      </ion-card-content>
+    </ion-card-header>
+    {{item.prop1}} {{item.prop2}} </ion-card>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+
+
+  <div *ngIf="activitiesData.length == 0">No Previous Activites!</div>
 </ion-content>

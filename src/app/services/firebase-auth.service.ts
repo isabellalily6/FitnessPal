@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -78,6 +79,13 @@ export class FirebaseAuthService {
       })
 
   }
+
+  getAllTracks(){
+    const collectionRef: AngularFirestoreCollection<any> = this.fireStore.collection(`users/${this.userData.uid}/tracks/`);
+
+    return collectionRef.snapshotChanges();
+  }
+  
 
 
   // Returns true when user is looged in and email is verified
