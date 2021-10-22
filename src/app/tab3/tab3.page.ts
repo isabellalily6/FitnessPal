@@ -1,7 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 
 import { Geolocation } from '@capacitor/geolocation';
-import {FirebaseAuthService} from '../services/firebase-auth.service'
+import { Router } from '@angular/router';
+import { NavigationExtras } from '@angular/router';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -14,6 +15,7 @@ declare var google;
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
+
 export class Tab3Page {
     @ViewChild('map') mapElement: ElementRef;
     map: any;
@@ -22,13 +24,17 @@ export class Tab3Page {
    
     isTracking: boolean = false;
     watch: any;
+    locations: any = [];
+
+    startTime: Date;
 
   constructor(
-    private authService: FirebaseAuthService, 
+    private router: Router 
   ) {}
 
   ionViewDidEnter(){
     this.showMap();
+    console.log("testingggg");
   }
 
   async showMap() {
@@ -55,6 +61,7 @@ export class Tab3Page {
 
   startTracking(){
     this.isTracking = true;
+    this.startTime = new Date();
 
     this.watch = Geolocation.watchPosition({}, (position, error) => {
       if(position && this.isTracking){
@@ -69,30 +76,31 @@ export class Tab3Page {
 
   stopTracking(){
     Geolocation.clearWatch(this.watch).then(() => {
-      let path = this.poly.getPath();
-      let lats = [];
-      let lngs = [];
       //console.log(path.pop().lat())
       this.isTracking = false;
+      this.poly.setPath([]);
 
-      while(path.getLength() != 0){
-        let tempPath = path.pop();
-        lats.push(tempPath.lat())
-        lngs.push(tempPath.lng())
-      }
+      let endTime = new Date();
 
-      console.log(lats);
-      console.log(lngs)
-      this.authService.addNewTrack(lats, lngs);
+      let navigationExtras: NavigationExtras = { state: { path: this.locations, startTime: this.startTime, endTime: endTime} };
+      this.router.navigate(['/track-summary'], navigationExtras)
 
     })
   }
 
   addNewPosition(lat, lng, time){
+    let tempLocation = {
+      latitude: lat,
+      longitude: lng,
+      time: time
+    }
+    this.locations.push(tempLocation);
+
     let pos = new google.maps.LatLng(lat, lng);
 
-    const path = this.poly.getPath();
+    this.map.setCenter(pos);
 
+    const path = this.poly.getPath();
     path.push(pos);
   }
 }
