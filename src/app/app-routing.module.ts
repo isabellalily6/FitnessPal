@@ -21,6 +21,11 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
     canLoad: [AuthGuard]
   },
+  {
+    path: 'track-summary',
+    loadChildren: () => import('./track-summary/track-summary.module').then( m => m.TrackSummaryPageModule),
+    canLoad: [AuthGuard]
+  },
 ];
 @NgModule({
   imports: [
