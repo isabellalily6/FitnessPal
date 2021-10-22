@@ -65,17 +65,16 @@ export class FirebaseAuthService {
   }
 
 
-  addNewTrack(lats, lngs){
+  async addNewTrack(path, distance, speed, times){
       let date = new Date();
 
       const userRef = this.fireStore.doc(`users/${this.userData.uid}/tracks/${date.toJSON()}`);
 
-      //console.log(date.toJSON())
-      //console.log(new Date(date.toJSON()))
-
-      userRef.set({
-        lats: lats,
-        lngs: lngs
+      await userRef.set({
+        path: path,
+        distance: distance, 
+        speed: speed,
+        times: times
       })
 
   }
