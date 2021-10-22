@@ -72,6 +72,8 @@ export class TrackSummaryPage implements OnInit {
   saveTrack() {
     console.log("saving track")
 
+    this.authService.addNewTrack(this.path, this.totalDistance, this.averageSpeed, this.times);
+    this.router.navigate(['/tabs/tab2'])
   }
 
 }
