@@ -33,10 +33,47 @@ export class TrackSummaryPage implements OnInit {
     this.averageSpeed = getSpeed(this.path[0], this.path[this.path.length - 1]);
 
     this.setTimes(state.startTime, state.endTime);
+  ionViewDidEnter() {
+    this.showMap();
   }
+
+  async showMap() {
+    console.log(this.path)
+    let latLng = new google.maps.LatLng(this.path[0].latitude, this.path[0].longitude);
+
+    let mapOptions = {
+      center: latLng,
+      zoom: 15,
+      disableDefaultUI: true,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+    this.poly = new google.maps.Polyline({
+      strokeColor: "#000000",
+      strokeOpacity: 1.0,
+      strokeWeight: 3,
+    });
+
+    this.poly.setMap(this.map);
+
+    let i = 0;
+    while (i != this.path.length) {
+      let currentLocation = this.path[i];
+      let pos = new google.maps.LatLng(currentLocation.latitude, currentLocation.longitude);
+      this.poly.getPath().push(pos);
+      i++;
+    }
+
+    console.log(this.path);
+  }
+
   saveTrack() {
     console.log("saving track")
 
   }
+
+}
 
 }
