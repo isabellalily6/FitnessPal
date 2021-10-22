@@ -11,20 +11,25 @@
   <ion-card>
     <ion-card-header>
       <ion-card-subtitle>Total Distance</ion-card-subtitle>
+      <ion-card-title>{{ totalDistance | number : '1.2-2'}}m</ion-card-title>
     </ion-card-header>
   
     <ion-card-content>
       Average Speed:
+      {{ averageSpeed | number : '1.2-2'}}m/s
     </ion-card-content>
   </ion-card>
 
   <ion-card>
     <ion-card-header>
       <ion-card-subtitle>Total Time</ion-card-subtitle>
+      <ion-card-title>{{ times.timeDiff }}</ion-card-title>
     </ion-card-header>
   
     <ion-card-content>
+      Start time: {{ times.startTime }}
       <br/>
+      Finish time:  {{ times.finishTime }}
     </ion-card-content>
   </ion-card>
   

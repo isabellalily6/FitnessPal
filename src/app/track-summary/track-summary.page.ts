@@ -33,6 +33,16 @@ export class TrackSummaryPage implements OnInit {
     this.averageSpeed = getSpeed(this.path[0], this.path[this.path.length - 1]);
 
     this.setTimes(state.startTime, state.endTime);
+
+    console.log(getPathLength(this.path));
+    console.log(getSpeed(this.path[0], this.path[this.path.length - 1]))
+    console.log(getSpeed({ latitude: 51.567294, longitude: 7.38896, time: 1360231200880 },
+      { latitude: 52.54944, longitude: 13.468509, time: 1360245600880 }))
+
+    console.log(new Date(this.path[0].time));
+
+  }
+
   ionViewDidEnter() {
     this.showMap();
   }
@@ -76,6 +86,29 @@ export class TrackSummaryPage implements OnInit {
     this.router.navigate(['/tabs/tab2'])
   }
 
-}
+  // taken from https://newbedev.com/js-convert-milliseconds-to-hours-minutes-seconds-code-example
+  setTimes(sTime, eTime) {
+    let duration = eTime - sTime;
+
+    let seconds = Math.floor((duration / 1000) % 60);
+    let minutes = Math.floor((duration / (1000 * 60)) % 60);
+    let hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+    let shours = (hours < 10) ? "0" + hours : hours;
+    let sminutes = (minutes < 10) ? "0" + minutes : minutes;
+    let sseconds = (seconds < 10) ? "0" + seconds : seconds;
+
+    let formattedDiff = shours + ":" + sminutes + ":" + sseconds;
+
+    this.times = {
+      startTime: sTime,
+      finishTime: eTime,
+      timeDiff: formattedDiff
+    };
+
+
+    console.log(formattedDiff);
+    console.log(this.times);
+  }
 
 }
