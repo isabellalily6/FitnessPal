@@ -64,6 +64,23 @@ export class FirebaseAuthService {
     })
   }
 
+
+  addNewTrack(lats, lngs){
+      let date = new Date();
+
+      const userRef = this.fireStore.doc(`users/${this.userData.uid}/tracks/${date.toJSON()}`);
+
+      //console.log(date.toJSON())
+      //console.log(new Date(date.toJSON()))
+
+      userRef.set({
+        lats: lats,
+        lngs: lngs
+      })
+
+  }
+
+
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     console.log(this.userData);

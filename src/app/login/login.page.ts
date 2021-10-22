@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
 
+import { Motion } from '@capacitor/motion';
+
 //code used from https://www.youtube.com/watch?v=RuuOdfz9Kxc&ab_channel=SimonGrimm
 
 @Component({
@@ -45,7 +47,7 @@ export class LoginPage implements OnInit {
     await this.authService.signIn(this.credentials.value)
     .then(() => {
       loading.dismiss();
-      this.router.navigate(['/tabs'])
+      this.router.navigate(['/tabs']);
     })
     .catch(() => {
       loading.dismiss();
