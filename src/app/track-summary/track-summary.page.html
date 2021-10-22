@@ -5,5 +5,25 @@
 </ion-header>
 
 <ion-content>
+  <ion-button type="button" expand="block" (click)="saveTrack()">Save Activity</ion-button>
+  <ion-button type="button" expand="block" [routerLink]="['/tabs/tab3']">Discard Activity</ion-button>
 
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Total Distance</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Average Speed:
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Total Time</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <br/>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
