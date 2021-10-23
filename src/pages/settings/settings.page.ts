@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {FirebaseAuthService} from '../services/firebase-auth.service'
+import {FirebaseAuthService} from '../../app/services/firebase-auth.service'
 
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HomeScreenPage } from './home-screen.page';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
+import { ExploreContainerComponentModule } from '../../app/explore-container/explore-container.module';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 
 import { HomeScreenPageRoutingModule } from './home-screen-routing.module';

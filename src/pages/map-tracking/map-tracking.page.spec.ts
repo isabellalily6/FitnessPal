@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
+import { ExploreContainerComponentModule } from '../../app/explore-container/explore-container.module';
 
-import { HomeScreenPage } from './home-screen.page';
+import { MapTrackingPage } from './map-tracking.page';
 
-describe('HomeScreenPage', () => {
-  let component: HomeScreenPage;
-  let fixture: ComponentFixture<HomeScreenPage>;
+describe('MapTrackingPage', () => {
+  let component: MapTrackingPage;
+  let fixture: ComponentFixture<MapTrackingPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeScreenPage],
+      declarations: [MapTrackingPage],
       imports: [IonicModule.forRoot(), ExploreContainerComponentModule]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(HomeScreenPage);
+    fixture = TestBed.createComponent(MapTrackingPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
