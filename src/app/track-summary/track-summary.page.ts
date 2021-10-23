@@ -40,7 +40,6 @@ export class TrackSummaryPage implements OnInit {
       { latitude: 52.54944, longitude: 13.468509, time: 1360245600880 }))
 
     console.log(new Date(this.path[0].time));
-
   }
 
   ionViewDidEnter() {
