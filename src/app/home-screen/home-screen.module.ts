@@ -2,11 +2,11 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab1Page } from './tab1.page';
+import { HomeScreenPage } from './home-screen.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 
-import { Tab1PageRoutingModule } from './tab1-routing.module';
+import { HomeScreenPageRoutingModule } from './home-screen-routing.module';
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab1PageRoutingModule,
+    HomeScreenPageRoutingModule,
     NgCircleProgressModule.forRoot()],
-  declarations: [Tab1Page]
+  declarations: [HomeScreenPage]
 })
-export class Tab1PageModule {}
+export class HomeScreenPageModule {}

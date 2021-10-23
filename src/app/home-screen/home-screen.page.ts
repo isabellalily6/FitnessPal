@@ -4,11 +4,11 @@ import Chart from 'chart.js/auto';
 import { LoadingController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-home-screen',
+  templateUrl: 'home-screen.page.html',
+  styleUrls: ['home-screen.page.scss']
 })
-export class Tab1Page {
+export class HomeScreenPage {
   userDetail: any = {activitiesGoal: 0};
   weeklyData: any = [];
 
