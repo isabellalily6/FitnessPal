@@ -80,10 +80,8 @@ export class TrackSummaryPage implements OnInit {
   }
 
   saveTrack() {
-    console.log("saving track")
-
     this.authService.addNewTrack(this.path, this.totalDistance, this.averageSpeed, this.times);
-    this.router.navigate(['/tabs/map-tracking'])
+    this.router.navigate(['/tabs/activities-list'])
   }
 
   // taken from https://newbedev.com/js-convert-milliseconds-to-hours-minutes-seconds-code-example
