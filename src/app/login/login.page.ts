@@ -5,8 +5,6 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
 
-import { Motion } from '@capacitor/motion';
-
 //code used from https://www.youtube.com/watch?v=RuuOdfz9Kxc&ab_channel=SimonGrimm
 
 @Component({

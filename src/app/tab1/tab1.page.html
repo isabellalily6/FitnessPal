@@ -3,16 +3,26 @@
     <ion-title>
       Tab 1
     </ion-title>
+    <ion-buttons collapse="true" slot="end">
+      <ion-button><ion-icon name="settings-outline"></ion-icon></ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card>
+    <ion-card-header class="center">
+      <ion-card-title class="center"> Welcome {{userDetail.firstName}} </ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="center">
+      You have completed {{weeklyData.length}} activities in the past week
+    </ion-card-content>
+  </ion-card>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
-  <ion-button type="button" expand="block" (click)="onClick()">Sign Up</ion-button>
+  <ion-card #card>
+    <ion-card-header> Weekly Distances </ion-card-header>
+    <ion-card-content>
+      <canvas #barCanvas id="bar"></canvas>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
