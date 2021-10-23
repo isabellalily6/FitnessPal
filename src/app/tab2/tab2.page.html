@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card *ngFor="let item of activitiesData">
+  <ion-card *ngFor="let item of activitiesData" id="{{item.id}}" (click)="showTrack(item.id)">
     <ion-card-header>
       <ion-card-title> {{ item.times.startTime }} </ion-card-title>
       <ion-card-content>

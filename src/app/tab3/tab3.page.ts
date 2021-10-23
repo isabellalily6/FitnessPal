@@ -4,10 +4,6 @@ import { Geolocation } from '@capacitor/geolocation';
 import { Router } from '@angular/router';
 import { NavigationExtras } from '@angular/router';
 
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-
 declare var google;
 
 @Component({

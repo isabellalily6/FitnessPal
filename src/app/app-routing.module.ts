@@ -31,6 +31,10 @@ const routes: Routes = [
     loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule),
     canLoad: [AuthGuard]
   },
+  {
+    path: 'show-track',
+    loadChildren: () => import('./show-track/show-track.module').then( m => m.ShowTrackPageModule)
+  },
 ];
 @NgModule({
   imports: [
