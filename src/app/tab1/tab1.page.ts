@@ -8,14 +8,13 @@ import Chart from 'chart.js/auto';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  userDetail: any;
+  userDetail: any = {};
   weeklyData: any = [];
 
   @ViewChild('barCanvas') barCanvas: ElementRef;
   private barChart: Chart;
 
   constructor(public authService: FirebaseAuthService) {
-  this.userDetail = authService.userData;
   authService.getUserDetails().subscribe(res => {
       this.userDetail = res.data();
     });
