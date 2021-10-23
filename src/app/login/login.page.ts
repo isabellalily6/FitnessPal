@@ -45,6 +45,7 @@ export class LoginPage implements OnInit {
     await this.authService.signIn(this.credentials.value)
     .then(() => {
       loading.dismiss();
+      this.credentials.reset();
       this.router.navigate(['/tabs']);
     })
     .catch(() => {

@@ -9,7 +9,7 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  userDetail: any = {};
+  userDetail: any = {activitiesGoal: 0};
   weeklyData: any = [];
 
   @ViewChild('barCanvas') barCanvas: ElementRef;

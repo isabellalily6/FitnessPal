@@ -58,4 +58,9 @@ export class SettingsPage implements OnInit {
     console.log("update");
   }
 
+  logout(){
+    this.authService.signoutUser();
+    this.router.navigate(['/login']);
+  }
+
 }

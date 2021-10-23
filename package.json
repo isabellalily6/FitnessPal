@@ -36,6 +36,7 @@
     "cordova-plugin-stepcounter": "^1.0.1",
     "firebase": "^9.1.2",
     "geolib": "^3.3.3",
+    "ng-circle-progress": "^1.6.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
