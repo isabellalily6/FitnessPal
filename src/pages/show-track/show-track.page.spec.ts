@@ -9,7 +9,7 @@ describe('ShowTrackPage', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ShowTrackPage ],
+      declarations: [ShowTrackPage],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 

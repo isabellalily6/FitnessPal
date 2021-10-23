@@ -8,12 +8,12 @@ import { FirebaseAuthService } from '../services/firebase-auth.service';
 })
 export class AuthGuard implements CanLoad {
 
-  constructor(private authService: FirebaseAuthService, private router: Router){}
+  constructor(private authService: FirebaseAuthService, private router: Router) { }
 
-  canLoad(){
+  canLoad() {
     const isAuthenticated = this.authService.isLoggedIn;
 
-    if(isAuthenticated){
+    if (isAuthenticated) {
       return true;
     } else {
       this.router.navigate(['/login']);

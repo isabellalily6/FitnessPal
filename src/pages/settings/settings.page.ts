@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {FirebaseAuthService} from '../../app/services/firebase-auth.service'
+import { FirebaseAuthService } from '../../app/services/firebase-auth.service'
 
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -15,21 +15,21 @@ export class SettingsPage implements OnInit {
   userData: any = {};
 
   constructor(
-    private authService: FirebaseAuthService, 
+    private authService: FirebaseAuthService,
     private router: Router,
     private fb: FormBuilder,
     private loadingController: LoadingController
-  ) { 
+  ) {
     authService.getUserDetails().subscribe(res => {
-        this.userData = res.data();
-        console.log(this.userData);
-        this.userDetails = this.fb.group({
-          firstName: [this.userData.firstName],
-          lastName: [this.userData.lastName],
-          distanceGoal: [this.userData.distanceGoal],
-          activitiesGoal: [this.userData.activitiesGoal]
-        })
-      });
+      this.userData = res.data();
+      console.log(this.userData);
+      this.userDetails = this.fb.group({
+        firstName: [this.userData.firstName],
+        lastName: [this.userData.lastName],
+        distanceGoal: [this.userData.distanceGoal],
+        activitiesGoal: [this.userData.activitiesGoal]
+      })
+    });
   }
 
   ngOnInit() {
@@ -41,24 +41,24 @@ export class SettingsPage implements OnInit {
     })
   }
 
-  async updateDetails(){
+  async updateDetails() {
     const loading = await this.loadingController.create();
     await loading.present();
 
     await this.authService.updateUserDetails(this.userDetails.value)
-    .then(() => {
-      loading.dismiss();
-      this.router.navigate(['/tabs']);
-    })
-    .catch(() => {
-      loading.dismiss();
-      window.alert("Updating Details Failed")
-    })
+      .then(() => {
+        loading.dismiss();
+        this.router.navigate(['/tabs']);
+      })
+      .catch(() => {
+        loading.dismiss();
+        window.alert("Updating Details Failed")
+      })
 
     console.log("update");
   }
 
-  logout(){
+  logout() {
     this.authService.signoutUser();
     this.router.navigate(['/login']);
   }

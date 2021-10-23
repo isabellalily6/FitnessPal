@@ -19,4 +19,4 @@ import { MapTrackingPageRoutingModule } from './map-tracking-routing.module';
   ],
   declarations: [MapTrackingPage]
 })
-export class MapTrackingPageModule {}
+export class MapTrackingPageModule { }

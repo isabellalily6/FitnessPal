@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FirebaseAuthService } from '../../app/services/firebase-auth.service'
 import { Router } from '@angular/router';
 import { NavigationExtras } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-activities-list',
@@ -13,27 +14,29 @@ export class ActivitiesListPage {
 
   constructor(
     private authService: FirebaseAuthService,
-    private router: Router ) {
+    private router: Router,
+    private loadingController: LoadingController) {
   }
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+
     this.authService.getAllTracks().subscribe(res => {
-      if (res) {
-        this.activitiesData = res.map(e => {
-          return {
-            id: e.payload.doc.id,
-            distance: e.payload.doc.data()['distance'],
-            path: e.payload.doc.data()['path'],
-            speed: e.payload.doc.data()['speed'],
-            times: {
-              startTime: e.payload.doc.data()['times'].startTime.toDate().toString().split(' ').slice(0, 5).join(' '),
-              finishTime: e.payload.doc.data()['times'].finishTime.toDate().toString().split(' ').slice(0, 5).join(' '),
-              timeDiff: e.payload.doc.data()['times'].timeDiff
-            }
+      this.activitiesData = res.map(e => {
+        return {
+          id: e.payload.doc.id,
+          distance: e.payload.doc.data()['distance'],
+          path: e.payload.doc.data()['path'],
+          speed: e.payload.doc.data()['speed'],
+          times: {
+            startTime: e.payload.doc.data()['times'].startTime.toDate().toString().split(' ').slice(0, 5).join(' '),
+            finishTime: e.payload.doc.data()['times'].finishTime.toDate().toString().split(' ').slice(0, 5).join(' '),
+            timeDiff: e.payload.doc.data()['times'].timeDiff
           }
-        })
-        console.log(this.activitiesData);
-      }
+        }
+      })
+      loading.dismiss();
     });
   }
 
@@ -47,9 +50,7 @@ export class ActivitiesListPage {
       }
     });
     console.log(itemData);
-    let navigationExtras: NavigationExtras = { state: { data: itemData} };
+    let navigationExtras: NavigationExtras = { state: { data: itemData } };
     this.router.navigate(['/show-track'], navigationExtras)
-
-
   }
 }

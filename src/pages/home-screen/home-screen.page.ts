@@ -9,7 +9,7 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['home-screen.page.scss']
 })
 export class HomeScreenPage {
-  userDetail: any = {activitiesGoal: 0};
+  userDetail: any = { activitiesGoal: 0 };
   weeklyData: any = [];
 
   @ViewChild('barCanvas') barCanvas: ElementRef;

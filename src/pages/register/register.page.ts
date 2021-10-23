@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FirebaseAuthService} from '../../app/services/firebase-auth.service'
+import { FirebaseAuthService } from '../../app/services/firebase-auth.service'
 
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -14,11 +14,11 @@ export class RegisterPage implements OnInit {
   signupInfo: FormGroup;
 
   constructor(
-    private authService: FirebaseAuthService, 
+    private authService: FirebaseAuthService,
     private router: Router,
     private fb: FormBuilder,
     private loadingController: LoadingController
-    ) {}
+  ) { }
 
   ngOnInit() {
     this.signupInfo = this.fb.group({
@@ -30,34 +30,34 @@ export class RegisterPage implements OnInit {
   }
 
 
-  get firstName(){
+  get firstName() {
     return this.signupInfo.get('firstName');
   }
 
-  get lastName(){
+  get lastName() {
     return this.signupInfo.get('lastName');
   }
-  get email(){
+  get email() {
     return this.signupInfo.get('email');
   }
 
-  get password(){
+  get password() {
     return this.signupInfo.get('password');
   }
 
-  async signup(){
+  async signup() {
     const loading = await this.loadingController.create();
     await loading.present();
 
     await this.authService.SignUp(this.signupInfo.value)
-    .then(() => {
-      loading.dismiss();
-      this.router.navigate(['/tabs'])
-    })
-    .catch(() => {
-      loading.dismiss();
-      window.alert("Signup Failed")
-    })
+      .then(() => {
+        loading.dismiss();
+        this.router.navigate(['/tabs'])
+      })
+      .catch(() => {
+        loading.dismiss();
+        window.alert("Signup Failed")
+      })
   }
 
 }

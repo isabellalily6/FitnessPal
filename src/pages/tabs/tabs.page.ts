@@ -9,7 +9,7 @@ import { IonTabs } from '@ionic/angular'
 export class TabsPage {
   private activeTab?: HTMLElement;
 
-  constructor() {}
+  constructor() { }
 
   // code used from https://github.com/ionic-team/ionic-framework/issues/16834
   tabChange(tabsRef: IonTabs) {
@@ -19,12 +19,12 @@ export class TabsPage {
   ionViewWillEnter() {
     this.propagateToActiveTab('ionViewWillEnter');
   }
-  
+
   ionViewDidEnter() {
     this.propagateToActiveTab('ionViewDidEnter');
   }
 
-  private propagateToActiveTab(eventName: string) {    
+  private propagateToActiveTab(eventName: string) {
     if (this.activeTab) {
       this.activeTab.dispatchEvent(new CustomEvent(eventName));
     }

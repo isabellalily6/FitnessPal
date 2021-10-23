@@ -13,22 +13,22 @@ declare var google;
 })
 
 export class MapTrackingPage {
-    @ViewChild('map') mapElement: ElementRef;
-    map: any;
-    poly: any;
-    markers = [];
-   
-    isTracking: boolean = false;
-    watch: any;
-    locations: any = [];
+  @ViewChild('map') mapElement: ElementRef;
+  map: any;
+  poly: any;
+  markers = [];
 
-    startTime: Date;
+  isTracking: boolean = false;
+  watch: any;
+  locations: any = [];
+
+  startTime: Date;
 
   constructor(
-    private router: Router 
-  ) {}
+    private router: Router
+  ) { }
 
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     this.showMap();
     console.log("testingggg");
   }
@@ -43,7 +43,7 @@ export class MapTrackingPage {
       disableDefaultUI: true,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
- 
+
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
     this.poly = new google.maps.Polyline({
@@ -55,12 +55,12 @@ export class MapTrackingPage {
     this.poly.setMap(this.map);
   }
 
-  startTracking(){
+  startTracking() {
     this.isTracking = true;
     this.startTime = new Date();
 
     this.watch = Geolocation.watchPosition({}, (position, error) => {
-      if(position && this.isTracking){
+      if (position && this.isTracking) {
         this.addNewPosition(
           position.coords.latitude,
           position.coords.longitude,
@@ -70,7 +70,7 @@ export class MapTrackingPage {
     })
   }
 
-  stopTracking(){
+  stopTracking() {
     Geolocation.clearWatch(this.watch).then(() => {
       //console.log(path.pop().lat())
       this.isTracking = false;
@@ -78,13 +78,13 @@ export class MapTrackingPage {
 
       let endTime = new Date();
 
-      let navigationExtras: NavigationExtras = { state: { path: this.locations, startTime: this.startTime, endTime: endTime} };
+      let navigationExtras: NavigationExtras = { state: { path: this.locations, startTime: this.startTime, endTime: endTime } };
       this.router.navigate(['/track-summary'], navigationExtras)
 
     })
   }
 
-  addNewPosition(lat, lng, time){
+  addNewPosition(lat, lng, time) {
     let tempLocation = {
       latitude: lat,
       longitude: lng,

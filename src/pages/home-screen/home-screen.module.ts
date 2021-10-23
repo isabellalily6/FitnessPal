@@ -18,4 +18,4 @@ import { HomeScreenPageRoutingModule } from './home-screen-routing.module';
     NgCircleProgressModule.forRoot()],
   declarations: [HomeScreenPage]
 })
-export class HomeScreenPageModule {}
+export class HomeScreenPageModule { }

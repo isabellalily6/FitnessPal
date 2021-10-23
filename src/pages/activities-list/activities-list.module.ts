@@ -18,4 +18,4 @@ import { ActivitiesListPageRoutingModule } from './activities-list-routing.modul
   ],
   declarations: [ActivitiesListPage]
 })
-export class Tab2PageModule {}
+export class Tab2PageModule { }

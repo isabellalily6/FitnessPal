@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -67,43 +66,43 @@ export class FirebaseAuthService {
     })
   }
 
-  async addNewTrack(path, distance, speed, times){
-      let date = new Date();
-      const userRef = this.fireStore.doc(`users/${this.userData.uid}/tracks/${date.toJSON()}`);
+  async addNewTrack(path, distance, speed, times) {
+    let date = new Date();
+    const userRef = this.fireStore.doc(`users/${this.userData.uid}/tracks/${date.toJSON()}`);
 
-      await userRef.set({
-        path: path,
-        distance: distance, 
-        speed: speed,
-        times: times
-      })
+    await userRef.set({
+      path: path,
+      distance: distance,
+      speed: speed,
+      times: times
+    })
 
   }
 
-  getAllTracks(){
+  getAllTracks() {
     const collectionRef: AngularFirestoreCollection<any> = this.fireStore.collection(`users/${this.userData.uid}/tracks/`);
 
     return collectionRef.snapshotChanges();
   }
 
-  getweeklyTracks(){
+  getweeklyTracks() {
     let weekago = new Date();
-    weekago.setDate(weekago.getDate()-7)
+    weekago.setDate(weekago.getDate() - 7)
     console.log(weekago)
     const collectionRef: AngularFirestoreCollection<any> = this.fireStore.collection(`users/${this.userData.uid}/tracks/`, ref => ref
-    .orderBy("times.startTime")
-    .startAt(weekago)
-    .endAt(new Date()))
+      .orderBy("times.startTime")
+      .startAt(weekago)
+      .endAt(new Date()))
 
     return collectionRef.snapshotChanges();
   }
 
-  getUserDetails(){
+  getUserDetails() {
     const userRef = this.fireStore.doc(`users/${this.userData.uid}`);
     return userRef.get();
   }
 
-  updateUserDetails(userDetails){
+  updateUserDetails(userDetails) {
     const userRef = this.fireStore.doc(`users/${this.userData.uid}`);
     console.log(userDetails);
     return userRef.set({

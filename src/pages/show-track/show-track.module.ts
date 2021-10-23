@@ -17,4 +17,4 @@ import { ShowTrackPage } from './show-track.page';
   ],
   declarations: [ShowTrackPage]
 })
-export class ShowTrackPageModule {}
+export class ShowTrackPageModule { }

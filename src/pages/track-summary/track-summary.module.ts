@@ -17,4 +17,4 @@ import { TrackSummaryPage } from './track-summary.page';
   ],
   declarations: [TrackSummaryPage]
 })
-export class TrackSummaryPageModule {}
+export class TrackSummaryPageModule { }

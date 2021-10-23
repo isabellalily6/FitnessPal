@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FirebaseAuthService} from '../../app/services/firebase-auth.service'
+import { FirebaseAuthService } from '../../app/services/firebase-auth.service'
 
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -16,11 +16,11 @@ export class LoginPage implements OnInit {
   credentials: FormGroup;
 
   constructor(
-    private authService: FirebaseAuthService, 
+    private authService: FirebaseAuthService,
     private router: Router,
     private fb: FormBuilder,
     private loadingController: LoadingController
-    ) {}
+  ) { }
 
   ngOnInit() {
     this.credentials = this.fb.group({
@@ -29,32 +29,32 @@ export class LoginPage implements OnInit {
     })
   }
 
-  get email(){
+  get email() {
     return this.credentials.get('email');
   }
 
-  get password(){
+  get password() {
     return this.credentials.get('password');
   }
 
-  async login(){
+  async login() {
     const loading = await this.loadingController.create();
     await loading.present();
 
     //console.log(this.authService.userData.uid)
     await this.authService.signIn(this.credentials.value)
-    .then(() => {
-      loading.dismiss();
-      this.credentials.reset();
-      this.router.navigate(['/tabs']);
-    })
-    .catch(() => {
-      loading.dismiss();
-      window.alert("Login Failed")
-    })
+      .then(() => {
+        loading.dismiss();
+        this.credentials.reset();
+        this.router.navigate(['/tabs']);
+      })
+      .catch(() => {
+        loading.dismiss();
+        window.alert("Login Failed")
+      })
   }
 
-  async signOutUser(){
+  async signOutUser() {
     //console.log(this.authService.userData.uid)
     await this.authService.signoutUser();
     this.router.navigate(['/tabs'])

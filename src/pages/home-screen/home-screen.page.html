@@ -17,21 +17,17 @@
       <ion-card-title class="center"> Welcome {{userDetail.firstName}} </ion-card-title>
     </ion-card-header>
     <ion-card-content class="center">
-      You have completed {{weeklyData.length}} activities in the past week <br/>
+      You have completed {{weeklyData.length}} activities in the past week <br />
       <circle-progress class="center" [percent]="userDetail.activitiesGoal/weeklyData.length*100" [radius]="50"
-      [outerStrokeWidth]="10"
-      [innerStrokeWidth]="5"
-      [title]="userDetail.activitiesGoal + '/' + weeklyData.length"
-      [subtitle]="['Activities', 'Completed']"
-      [showUnits]="false"
-      ></circle-progress>
+        [outerStrokeWidth]="10" [innerStrokeWidth]="5" [title]="userDetail.activitiesGoal + '/' + weeklyData.length"
+        [subtitle]="['Activities', 'Completed']" [showUnits]="false"></circle-progress>
     </ion-card-content>
   </ion-card>
 
-    <ion-card #card>
-      <ion-card-header> Weekly Distances </ion-card-header>
-      <ion-card-content>
-        <canvas #barCanvas></canvas>
-      </ion-card-content>
-    </ion-card>
-  </ion-content>
+  <ion-card #card>
+    <ion-card-header> Weekly Distances </ion-card-header>
+    <ion-card-content>
+      <canvas #barCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

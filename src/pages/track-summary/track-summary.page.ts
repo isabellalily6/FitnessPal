@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {FirebaseAuthService} from '../../app/services/firebase-auth.service'
+import { FirebaseAuthService } from '../../app/services/firebase-auth.service'
 import { Router } from '@angular/router';
 import { google } from "google-maps";
 
