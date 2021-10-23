@@ -98,6 +98,11 @@ export class FirebaseAuthService {
     return collectionRef.snapshotChanges();
   }
 
+  getUserDetails(){
+    const userRef = this.fireStore.doc(`users/${this.userData.uid}`);
+    return userRef.get();
+
+  }
 
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {

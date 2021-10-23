@@ -7,6 +7,15 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header class="center">
+      <ion-card-title class="center"> Welcome {{userDetail.firstName}} </ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="center">
+      You have completed {{weeklyData.length}} activities in the past week
+    </ion-card-content>
+  </ion-card>
+
   <ion-card #card>
     <ion-card-header> Weekly Distances </ion-card-header>
     <ion-card-content>

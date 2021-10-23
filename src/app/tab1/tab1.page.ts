@@ -8,13 +8,19 @@ import Chart from 'chart.js/auto';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  userDetail: string;
-  weeklyData: any;
+  userDetail: any;
+  weeklyData: any = [];
 
   @ViewChild('barCanvas') barCanvas: ElementRef;
   private barChart: Chart;
 
   constructor(public authService: FirebaseAuthService) {
+  this.userDetail = authService.userData;
+  authService.getUserDetails().subscribe(res => {
+      this.userDetail = res.data();
+    });
+
+console.log(authService.getUserDetails());
   }
 
   ionViewDidEnter(){
@@ -95,7 +101,7 @@ export class Tab1Page {
           borderWidth: 1
         }
       ]
-    }
+    },
   });
   }
 }
