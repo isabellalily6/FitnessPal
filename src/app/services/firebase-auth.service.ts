@@ -107,8 +107,8 @@ export class FirebaseAuthService {
     const userRef = this.fireStore.doc(`users/${this.userData.uid}`);
     console.log(userDetails);
     return userRef.set({
-      firstName: userDetails.firstName.trim(),
-      lastName: userDetails.lastName.trim(),
+      firstName: userDetails.firstName,
+      lastName: userDetails.lastName,
       activitiesGoal: userDetails.activitiesGoal,
       distanceGoal: userDetails.distanceGoal
     })

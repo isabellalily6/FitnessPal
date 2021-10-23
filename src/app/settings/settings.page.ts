@@ -24,8 +24,8 @@ export class SettingsPage implements OnInit {
         this.userData = res.data();
         console.log(this.userData);
         this.userDetails = this.fb.group({
-          firstName: [this.userData.firstName + '   '],
-          lastName: [this.userData.lastName + '   '],
+          firstName: [this.userData.firstName],
+          lastName: [this.userData.lastName],
           distanceGoal: [this.userData.distanceGoal],
           activitiesGoal: [this.userData.activitiesGoal]
         })
@@ -42,8 +42,6 @@ export class SettingsPage implements OnInit {
   }
 
   async updateDetails(){
-    console.log(this.userDetails.value)
-
     const loading = await this.loadingController.create();
     await loading.present();
 
