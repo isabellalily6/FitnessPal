@@ -26,6 +26,11 @@ const routes: Routes = [
     loadChildren: () => import('./track-summary/track-summary.module').then( m => m.TrackSummaryPageModule),
     canLoad: [AuthGuard]
   },
+  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule),
+    canLoad: [AuthGuard]
+  },
 ];
 @NgModule({
   imports: [

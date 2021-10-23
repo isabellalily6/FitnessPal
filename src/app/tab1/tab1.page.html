@@ -4,7 +4,7 @@
       Tab 1
     </ion-title>
     <ion-buttons collapse="true" slot="end">
-      <ion-button><ion-icon name="settings-outline"></ion-icon></ion-button>
+      <ion-button [routerLink]="['/settings']"><ion-icon name="settings-outline"></ion-icon></ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -22,7 +22,7 @@
   <ion-card #card>
     <ion-card-header> Weekly Distances </ion-card-header>
     <ion-card-content>
-      <canvas #barCanvas id="bar"></canvas>
+      <canvas #barCanvas></canvas>
     </ion-card-content>
   </ion-card>
 </ion-content>

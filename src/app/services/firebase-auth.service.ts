@@ -36,6 +36,8 @@ export class FirebaseAuthService {
           firstName: value.firstName,
           lastName: value.lastName,
           email: user.email,
+          activitiesGoal: 0,
+          distanceGoal: 0
         })
       })
   }
@@ -65,10 +67,8 @@ export class FirebaseAuthService {
     })
   }
 
-
   async addNewTrack(path, distance, speed, times){
       let date = new Date();
-
       const userRef = this.fireStore.doc(`users/${this.userData.uid}/tracks/${date.toJSON()}`);
 
       await userRef.set({
@@ -101,7 +101,17 @@ export class FirebaseAuthService {
   getUserDetails(){
     const userRef = this.fireStore.doc(`users/${this.userData.uid}`);
     return userRef.get();
+  }
 
+  updateUserDetails(userDetails){
+    const userRef = this.fireStore.doc(`users/${this.userData.uid}`);
+    console.log(userDetails);
+    return userRef.set({
+      firstName: userDetails.firstName,
+      lastName: userDetails.lastName,
+      activitiesGoal: userDetails.activitiesGoal,
+      distanceGoal: userDetails.distanceGoal
+    })
   }
 
   // Returns true when user is looged in and email is verified
