@@ -5,7 +5,7 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-buttons collapse="true" slot="end">
-      <ion-button type="submit" form="userDetails"><ion-icon name="checkmark-sharp"></ion-icon></ion-button>
+      <ion-button (click)="updateDetails()"><ion-icon name="checkmark-sharp"></ion-icon></ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -30,7 +30,7 @@
 
     <ion-item>
       <ion-label>Weekly Activities Goal </ion-label>
-      <ion-input class="right" type="number" min="0" formControlName="activtiesGoal"></ion-input>
+      <ion-input class="right" type="number" min="0" formControlName="activitiesGoal"></ion-input>
     </ion-item>
   </form>
 

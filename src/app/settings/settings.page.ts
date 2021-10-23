@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {FirebaseAuthService} from '../services/firebase-auth.service'
 
+import { LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.page.html',
@@ -13,7 +16,9 @@ export class SettingsPage implements OnInit {
 
   constructor(
     private authService: FirebaseAuthService, 
-    private fb: FormBuilder
+    private router: Router,
+    private fb: FormBuilder,
+    private loadingController: LoadingController
   ) { 
     authService.getUserDetails().subscribe(res => {
         this.userData = res.data();
@@ -22,7 +27,7 @@ export class SettingsPage implements OnInit {
           firstName: [this.userData.firstName + '   '],
           lastName: [this.userData.lastName + '   '],
           distanceGoal: [this.userData.distanceGoal],
-          activtiesGoal: [this.userData.activitiesGoal]
+          activitiesGoal: [this.userData.activitiesGoal]
         })
       });
   }
@@ -32,13 +37,27 @@ export class SettingsPage implements OnInit {
       firstName: [''],
       lastName: [''],
       distanceGoal: [''],
-      activtiesGoal: ['']
+      activitiesGoal: ['']
     })
   }
 
+  async updateDetails(){
+    console.log(this.userDetails.value)
 
-  updateDetails(){
+    const loading = await this.loadingController.create();
+    await loading.present();
 
+    await this.authService.updateUserDetails(this.userDetails.value)
+    .then(() => {
+      loading.dismiss();
+      this.router.navigate(['/tabs']);
+    })
+    .catch(() => {
+      loading.dismiss();
+      window.alert("Updating Details Failed")
+    })
+
+    console.log("update");
   }
 
 }
