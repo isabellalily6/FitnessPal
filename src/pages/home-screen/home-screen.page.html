@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Home
+    </ion-title>
+    <ion-buttons collapse="true" slot="end">
+      <ion-button [routerLink]="['/settings']">
+        <ion-icon name="settings-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header class="center">
+      <ion-card-title class="center"> Welcome {{userDetail.firstName}} </ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="center">
+      You have completed {{weeklyData.length}} activities in the past week <br />
+      <circle-progress class="center" [percent]="weeklyData.length/userDetail.activitiesGoal*100" [radius]="100"
+        [outerStrokeWidth]="10" [innerStrokeWidth]="5" [title]="weeklyData.length + '/' + userDetail.activitiesGoal"
+        [subtitle]="['Activities', 'Completed']" [showUnits]="false" [subtitleFontSize]="23" [titleFontWeight]="500"
+        [titleFontSize]="40"></circle-progress>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header> Weekly Distances </ion-card-header>
+    <ion-card-content>
+      <canvas height="200" #barCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
