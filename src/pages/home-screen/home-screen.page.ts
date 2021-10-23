@@ -111,6 +111,9 @@ export class HomeScreenPage {
           }
         ]
       },
+      options: {
+        responsive: false,
+    }
     });
   }
 }

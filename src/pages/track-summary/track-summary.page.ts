@@ -29,6 +29,7 @@ export class TrackSummaryPage implements OnInit {
   ngOnInit() {
     const state = this.router.getCurrentNavigation().extras.state;
     this.path = state.path;
+
     this.totalDistance = getPathLength(this.path);
     this.averageSpeed = getSpeed(this.path[0], this.path[this.path.length - 1]);
 

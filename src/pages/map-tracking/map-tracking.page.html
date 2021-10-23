@@ -9,11 +9,11 @@
 <ion-content [fullscreen]="true">
   <div #map id="map"></div>
 
-  <ion-button expand="block" (click)="startTracking()" *ngIf="!isTracking">
+  <ion-button class="button" expand="block" (click)="startTracking()" *ngIf="!isTracking">
     Start Tracking
   </ion-button>
 
-  <ion-button expand="block" (click)="stopTracking()" *ngIf="isTracking">
+  <ion-button class="button" expand="block" (click)="stopTracking()" *ngIf="isTracking">
     Stop Tracking
   </ion-button>
 

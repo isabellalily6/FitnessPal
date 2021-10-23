@@ -16,7 +16,6 @@ export class MapTrackingPage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
   poly: any;
-  markers = [];
 
   isTracking: boolean = false;
   watch: any;
@@ -30,7 +29,6 @@ export class MapTrackingPage {
 
   ionViewDidEnter() {
     this.showMap();
-    console.log("testingggg");
   }
 
   async showMap() {
@@ -55,30 +53,45 @@ export class MapTrackingPage {
     this.poly.setMap(this.map);
   }
 
-  startTracking() {
+  async startTracking() {
     this.isTracking = true;
     this.startTime = new Date();
 
-    this.watch = Geolocation.watchPosition({}, (position, error) => {
+    this.watch = await Geolocation.watchPosition({}, (position, error) => {
       if (position && this.isTracking) {
         this.addNewPosition(
           position.coords.latitude,
           position.coords.longitude,
           position.timestamp
-        )
-      }
-    })
+        );
+      } else if (error){
+        console.log(error);
+      };
+    });
+    console.log("hello");
+    console.log(this.watch);
   }
 
   stopTracking() {
-    Geolocation.clearWatch(this.watch).then(() => {
-      //console.log(path.pop().lat())
+    console.log("watch")
+    console.log(this.watch)
+    Geolocation.clearWatch({id: this.watch}).then(() => {
       this.isTracking = false;
       this.poly.setPath([]);
 
       let endTime = new Date();
 
+      if(this.locations.length == 0){
+        this.locations.push({
+          latitude: 0,
+          longitude: 0,
+          time: 0
+        })
+      }
+
       let navigationExtras: NavigationExtras = { state: { path: this.locations, startTime: this.startTime, endTime: endTime } };
+      this.locations = [];
+      this.watch = null;
       this.router.navigate(['/track-summary'], navigationExtras)
 
     })
@@ -91,7 +104,6 @@ export class MapTrackingPage {
       time: time
     }
     this.locations.push(tempLocation);
-
     let pos = new google.maps.LatLng(lat, lng);
 
     this.map.setCenter(pos);
