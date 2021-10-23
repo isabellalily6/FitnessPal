@@ -29,6 +29,13 @@ export class LoginPage implements OnInit {
     })
   }
 
+  ionViewWillEnter(){
+    this.credentials = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]]
+    })
+  }
+
   get email(){
     return this.credentials.get('email');
   }
