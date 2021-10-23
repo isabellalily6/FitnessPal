@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { NavigationExtras } from '@angular/router';
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  selector: 'app-activities-list',
+  templateUrl: 'activities-list.page.html',
+  styleUrls: ['activities-list.page.scss']
 })
-export class Tab2Page {
+export class ActivitiesListPage {
   activitiesData: any = [];
 
   constructor(
