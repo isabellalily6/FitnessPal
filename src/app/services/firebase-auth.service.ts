@@ -80,7 +80,8 @@ export class FirebaseAuthService {
   }
 
   getAllTracks() {
-    const collectionRef: AngularFirestoreCollection<any> = this.fireStore.collection(`users/${this.userData.uid}/tracks/`);
+    const collectionRef: AngularFirestoreCollection<any> = this.fireStore.collection(`users/${this.userData.uid}/tracks/`, 
+    ref => ref.orderBy("times.startTime", "desc"));
 
     return collectionRef.snapshotChanges();
   }
