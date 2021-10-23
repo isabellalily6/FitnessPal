@@ -36,6 +36,8 @@ export class FirebaseAuthService {
           firstName: value.firstName,
           lastName: value.lastName,
           email: user.email,
+          activitiesGoal: 0,
+          distanceGoal: 0
         })
       })
   }
