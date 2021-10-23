@@ -12,12 +12,12 @@ const routes: Routes = [
         loadChildren: () => import('../home-screen/home-screen.module').then(m => m.HomeScreenPageModule)
       },
       {
-        path: 'activities-list',
-        loadChildren: () => import('../activities-list/activities-list.module').then(m => m.Tab2PageModule)
-      },
-      {
         path: 'map-tracking',
         loadChildren: () => import('../map-tracking/map-tracking.module').then(m => m.MapTrackingPageModule)
+      },
+      {
+        path: 'activities-list',
+        loadChildren: () => import('../activities-list/activities-list.module').then(m => m.Tab2PageModule)
       },
       {
         path: '',
