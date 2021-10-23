@@ -8,27 +8,27 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'home-screen',
         loadChildren: () => import('../home-screen/home-screen.module').then(m => m.HomeScreenPageModule)
       },
       {
-        path: 'tab2',
+        path: 'activities-list',
         loadChildren: () => import('../activities-list/activities-list.module').then(m => m.Tab2PageModule)
       },
       {
-        path: 'tab3',
+        path: 'map-tracking',
         loadChildren: () => import('../map-tracking/map-tracking.module').then(m => m.MapTrackingPageModule)
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/home-screen',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/home-screen',
     pathMatch: 'full'
   }
 ];
