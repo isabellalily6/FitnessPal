@@ -7,12 +7,12 @@ import { NavigationExtras } from '@angular/router';
 declare var google;
 
 @Component({
-  selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss']
+  selector: 'app-map-tracking',
+  templateUrl: 'map-tracking.page.html',
+  styleUrls: ['map-tracking.page.scss']
 })
 
-export class Tab3Page {
+export class MapTrackingPage {
     @ViewChild('map') mapElement: ElementRef;
     map: any;
     poly: any;
