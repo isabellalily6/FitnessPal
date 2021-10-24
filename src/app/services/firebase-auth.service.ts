@@ -80,7 +80,8 @@ export class FirebaseAuthService {
   }
 
   getAllTracks() {
-    const collectionRef: AngularFirestoreCollection<any> = this.fireStore.collection(`users/${this.userData.uid}/tracks/`, 
+    const collectionRef: AngularFirestoreCollection<any> = 
+    this.fireStore.collection(`users/${this.userData.uid}/tracks/`, 
     ref => ref.orderBy("times.startTime", "desc"));
 
     return collectionRef.snapshotChanges();
@@ -90,7 +91,8 @@ export class FirebaseAuthService {
     let weekago = new Date();
     weekago.setDate(weekago.getDate() - 7)
     console.log(weekago)
-    const collectionRef: AngularFirestoreCollection<any> = this.fireStore.collection(`users/${this.userData.uid}/tracks/`, ref => ref
+    const collectionRef: AngularFirestoreCollection<any> =
+    this.fireStore.collection(`users/${this.userData.uid}/tracks/`, ref => ref
       .orderBy("times.startTime")
       .startAt(weekago)
       .endAt(new Date()))

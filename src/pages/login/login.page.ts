@@ -40,8 +40,7 @@ export class LoginPage implements OnInit {
   async login() {
     const loading = await this.loadingController.create();
     await loading.present();
-
-    //console.log(this.authService.userData.uid)
+    
     await this.authService.signIn(this.credentials.value)
       .then(() => {
         loading.dismiss();

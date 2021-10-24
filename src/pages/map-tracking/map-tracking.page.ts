@@ -33,6 +33,8 @@ export class MapTrackingPage {
 
   async showMap() {
     const coordinates = await Geolocation.getCurrentPosition();
+
+    
     let latLng = new google.maps.LatLng(coordinates.coords.latitude, coordinates.coords.longitude);
 
     let mapOptions = {
@@ -68,13 +70,9 @@ export class MapTrackingPage {
         console.log(error);
       };
     });
-    console.log("hello");
-    console.log(this.watch);
   }
 
   stopTracking() {
-    console.log("watch")
-    console.log(this.watch)
     Geolocation.clearWatch({id: this.watch}).then(() => {
       this.isTracking = false;
       this.poly.setPath([]);
@@ -105,9 +103,7 @@ export class MapTrackingPage {
     }
     this.locations.push(tempLocation);
     let pos = new google.maps.LatLng(lat, lng);
-
     this.map.setCenter(pos);
-
     const path = this.poly.getPath();
     path.push(pos);
   }

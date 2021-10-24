@@ -34,13 +34,6 @@ export class TrackSummaryPage implements OnInit {
     this.averageSpeed = getSpeed(this.path[0], this.path[this.path.length - 1]);
 
     this.setTimes(state.startTime, state.endTime);
-
-    console.log(getPathLength(this.path));
-    console.log(getSpeed(this.path[0], this.path[this.path.length - 1]))
-    console.log(getSpeed({ latitude: 51.567294, longitude: 7.38896, time: 1360231200880 },
-      { latitude: 52.54944, longitude: 13.468509, time: 1360245600880 }))
-
-    console.log(new Date(this.path[0].time));
   }
 
   ionViewDidEnter() {
@@ -48,7 +41,6 @@ export class TrackSummaryPage implements OnInit {
   }
 
   async showMap() {
-    console.log(this.path)
     let latLng = new google.maps.LatLng(this.path[0].latitude, this.path[0].longitude);
 
     let mapOptions = {
@@ -75,8 +67,6 @@ export class TrackSummaryPage implements OnInit {
       this.poly.getPath().push(pos);
       i++;
     }
-
-    console.log(this.path);
   }
 
   saveTrack() {
@@ -103,10 +93,6 @@ export class TrackSummaryPage implements OnInit {
       finishTime: eTime,
       timeDiff: formattedDiff
     };
-
-
-    console.log(formattedDiff);
-    console.log(this.times);
   }
 
 }
