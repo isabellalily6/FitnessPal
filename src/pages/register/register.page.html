@@ -1,5 +1,8 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>Register Account</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,7 +15,7 @@
       <ion-input type="text" placeholder="Last Name" formControlName="lastName"></ion-input>
     </ion-item>
 
-    <div *ngIf="(firstName.dirty && lastName.dirty) 
+    <div class="errors" *ngIf="(firstName.touched && lastName.touched) 
     && (lastName.errors || firstName.errors)" class="errors">
       <span *ngIf="firstName.errors?.required">Fullname is required</span>
       <span *ngIf="lastName.errors?.required">Fullname is required</span>
@@ -22,7 +25,7 @@
       <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
     </ion-item>
 
-    <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+    <div class="errors" *ngIf="(email.touched) && email.errors" class="errors">
       <span *ngIf="email.errors?.required">Email is required</span>
       <span *ngIf="email.errors?.email">Email is invalid</span>
     </div>
@@ -31,11 +34,11 @@
       <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
     </ion-item>
 
-    <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
+    <div class="errors" *ngIf="(password.touched) && password.errors" class="errors">
       <span *ngIf="password.errors?.required">Password is required</span>
       <span *ngIf="password.errors?.minlength">Password must be minimum 6 characters</span>
     </div>
 
-    <ion-button type="submit" expand="block" [disabled]="!signupInfo.valid">Sign Up</ion-button>
+    <ion-button color="secondary" type="submit" expand="block" [disabled]="!signupInfo.valid">Sign Up</ion-button>
   </form>
 </ion-content>

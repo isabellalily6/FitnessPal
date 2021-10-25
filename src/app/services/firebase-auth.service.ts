@@ -1,35 +1,40 @@
 import { Injectable } from '@angular/core';
-
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FirebaseAuthService {
-  userData: any = null; // Save logged in user data
 
-  constructor(private afAuth: AngularFireAuth, private fireStore: AngularFirestore) {
-    /* Saving user data in localstorage when 
-    logged in and setting up null when logged out */
+export class FirebaseAuthService {
+  userData: any = null; // Users login details
+
+  constructor(
+    private afAuth: AngularFireAuth,
+    private fireStore: AngularFirestore) {
+    // subscribe to authstate to notifiy of any changes
     this.afAuth.authState.subscribe(user => {
       if (user) {
-        console.log("getting there")
         this.userData = user;
-        console.log(user)
       } else {
         this.userData = null;
       }
     })
   }
 
-  // Sign up with email/password
-  SignUp(value) {
+  /*
+  * Method to sign up a user, with their details
+  */
+  async SignUp(value: any) {
+    // use firebase authentication to create a new user with their email and password
     return this.afAuth.createUserWithEmailAndPassword(value.email, value.password)
       .then((result) => {
-        const user = result.user;
+        // retrieve the user data
+        let user = result.user;
         this.userData = user;
         const userRef = this.fireStore.doc(`users/${user.uid}`);
+
+        // set the users document with their relevant values
         userRef.set({
           uid: user.uid,
           firstName: value.firstName,
@@ -41,22 +46,27 @@ export class FirebaseAuthService {
       })
   }
 
-  signIn(value) {
+  /*
+  * Method to sign in a user, with their details
+  */
+  async signIn(value: any) {
+    // use firebase authentication to sign in a new user with their email and password
     return this.afAuth.signInWithEmailAndPassword(value.email, value.password)
       .then((result) => {
-        console.log("update data");
+        // retrieve the user data
         this.userData = result.user;
-        console.log(result.user.uid)
-        console.log("done");
       })
   }
 
+  /*
+  * Method to sign out a user
+  */
   signoutUser() {
     return new Promise<void>((resolve, reject) => {
+      // if a current user is logged in, sign them out
       if (this.afAuth.currentUser) {
         this.afAuth.signOut()
           .then(() => {
-            console.log("Sign out");
             this.userData = null;
             resolve();
           }).catch(() => {
@@ -66,11 +76,16 @@ export class FirebaseAuthService {
     })
   }
 
-  async addNewTrack(path, distance, speed, times) {
+  /*
+  * Method to add a new track to a users database
+  */
+  async addNewTrack(path: Array<any>, distance: number, speed: number, times: any) {
+    // get the date and use it to create a new document
     let date = new Date();
-    const userRef = this.fireStore.doc(`users/${this.userData.uid}/tracks/${date.toJSON()}`);
+    const docRef = this.fireStore.doc(`users/${this.userData.uid}/tracks/${date.toJSON()}`);
 
-    await userRef.set({
+    // set the relevant information in the document
+    await docRef.set({
       path: path,
       distance: distance,
       speed: speed,
@@ -79,33 +94,53 @@ export class FirebaseAuthService {
 
   }
 
+  /*
+  * Method to get all the users' tracks from the database
+  */
   getAllTracks() {
-    const collectionRef: AngularFirestoreCollection<any> = this.fireStore.collection(`users/${this.userData.uid}/tracks/`, 
-    ref => ref.orderBy("times.startTime", "desc"));
+    // collect the ordered collection and return it
+    const collectionRef: AngularFirestoreCollection<any> =
+      this.fireStore.collection(`users/${this.userData.uid}/tracks/`,
+        ref => ref.orderBy("times.startTime", "desc"));
 
     return collectionRef.snapshotChanges();
   }
 
+  /*
+  * Method to get the users' tracks from the last week 
+  */
   getweeklyTracks() {
+    // get the current date and calculate the data a week ago
     let weekago = new Date();
     weekago.setDate(weekago.getDate() - 7)
-    console.log(weekago)
-    const collectionRef: AngularFirestoreCollection<any> = this.fireStore.collection(`users/${this.userData.uid}/tracks/`, ref => ref
-      .orderBy("times.startTime")
-      .startAt(weekago)
-      .endAt(new Date()))
+
+    // collect the ordered and limited collection and return it
+    const collectionRef: AngularFirestoreCollection<any> =
+      this.fireStore.collection(`users/${this.userData.uid}/tracks/`, ref => ref
+        .orderBy("times.startTime")
+        .startAt(weekago)
+        .endAt(new Date()))
 
     return collectionRef.snapshotChanges();
   }
 
+  /*
+  * Method to get the users details
+  */
   getUserDetails() {
+    // get the users information document and return it
     const userRef = this.fireStore.doc(`users/${this.userData.uid}`);
     return userRef.get();
   }
 
-  updateUserDetails(userDetails) {
+  /*
+  * Method to update the users details
+  */
+  updateUserDetails(userDetails: any) {
+    // get the users document 
     const userRef = this.fireStore.doc(`users/${this.userData.uid}`);
-    console.log(userDetails);
+
+    // set the relevant information in the document
     return userRef.set({
       firstName: userDetails.firstName,
       lastName: userDetails.lastName,
@@ -114,9 +149,11 @@ export class FirebaseAuthService {
     })
   }
 
-  // Returns true when user is looged in and email is verified
+  /*
+  * Returns whether a user is logged in or now
+  * return true if the user is logged in, otherwise return false
+  */
   get isLoggedIn(): boolean {
-    console.log(this.userData);
     return (this.userData !== null) ? true : false;
   }
 

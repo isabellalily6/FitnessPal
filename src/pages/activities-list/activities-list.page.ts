@@ -9,6 +9,7 @@ import { LoadingController } from '@ionic/angular';
   templateUrl: 'activities-list.page.html',
   styleUrls: ['activities-list.page.scss']
 })
+
 export class ActivitiesListPage {
   activitiesData: any = [];
 
@@ -19,11 +20,14 @@ export class ActivitiesListPage {
   }
 
   async ionViewWillEnter() {
+    // show the loading symbol
     const loading = await this.loadingController.create();
     await loading.present();
 
+    // load all the tracks from firebase and process it and save it in a file
     this.authService.getAllTracks().subscribe(res => {
       this.activitiesData = res.map(e => {
+        // format the data
         return {
           id: e.payload.doc.id,
           distance: e.payload.doc.data()['distance'],
@@ -36,20 +40,25 @@ export class ActivitiesListPage {
           }
         }
       })
+      // dismiss the loading symbol once the data has been loaded
       loading.dismiss();
     });
   }
 
-  showTrack(itemId) {
-    console.log(itemId);
+  /*
+  * Method to show the users their track details
+  */
+  showTrack(itemId: string) {
     let itemData: any;
 
+    // loop through each element to find the correct one
     this.activitiesData.forEach(element => {
       if (element.id == itemId) {
         itemData = element;
       }
     });
-    console.log(itemData);
+
+    // navigate to the show track screen with the item's data as a parameter 
     let navigationExtras: NavigationExtras = { state: { data: itemData } };
     this.router.navigate(['/show-track'], navigationExtras)
   }

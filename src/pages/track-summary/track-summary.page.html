@@ -1,12 +1,13 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>trackSummary</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Activity Summary</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-button type="button" expand="block" (click)="saveTrack()">Save Activity</ion-button>
-  <ion-button type="button" expand="block" [routerLink]="['/tabs/map-tracking']">Discard Activity</ion-button>
+  <ion-button color="success" type="button" class="button" expand="block" (click)="saveTrack()">Save Activity</ion-button>
+  <ion-button color="danger" type="button" class="button" expand="block" [routerLink]="['/tabs/map-tracking']">Discard Activity
+  </ion-button>
 
   <ion-card>
     <ion-card-header>
@@ -27,9 +28,9 @@
     </ion-card-header>
 
     <ion-card-content>
-      Start time: {{ times.startTime }}
+      Start time: {{ times.startTime.toString().split(' ').slice(0, 5).join(' ') }}
       <br />
-      Finish time: {{ times.finishTime }}
+      Finish time: {{ times.finishTime.toString().split(' ').slice(0, 5).join(' ') }}
     </ion-card-content>
   </ion-card>
 

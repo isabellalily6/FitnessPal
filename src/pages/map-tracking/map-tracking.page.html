@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
       Tracking
     </ion-title>
@@ -9,12 +9,14 @@
 <ion-content [fullscreen]="true">
   <div #map id="map"></div>
 
-  <ion-button class="button" expand="block" (click)="startTracking()" *ngIf="!isTracking">
-    Start Tracking
-  </ion-button>
+  <ion-fab *ngIf="!isTracking" horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button class="fab-button" color="danger" (click)="startTracking()">Start<br />
+      Tracking</ion-fab-button>
+  </ion-fab>
 
-  <ion-button class="button" expand="block" (click)="stopTracking()" *ngIf="isTracking">
-    Stop Tracking
-  </ion-button>
+  <ion-fab *ngIf="isTracking" horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button class="fab-button" color="danger" (click)="stopTracking()">Stop<br />
+      Tracking</ion-fab-button>
+  </ion-fab>
 
 </ion-content>

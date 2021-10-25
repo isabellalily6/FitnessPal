@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
       Previous Activities
     </ion-title>
@@ -7,19 +7,17 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card *ngFor="let item of activitiesData" id="{{item.id}}" (click)="showTrack(item.id)">
+  <ion-card color="light" *ngFor="let item of activitiesData" id="{{item.id}}" (click)="showTrack(item.id)">
     <ion-card-header>
       <ion-card-title> {{ item.times.startTime }} </ion-card-title>
-      <ion-card-content>
-        Distance: {{item.distance | number : '1.2-2'}}m <br />
-        Total Time: {{item.times.timeDiff}} <br />
-        Average Speed: {{item.speed | number : '1.2-2'}}m/s <br />
-      </ion-card-content>
     </ion-card-header>
+    <ion-card-content>
+      Distance: {{item.distance | number : '1.2-2'}}m <br />
+      Total Time: {{item.times.timeDiff}} <br />
+      Average Speed: {{item.speed | number : '1.2-2'}}m/s <br />
+    </ion-card-content>
     {{item.prop1}} {{item.prop2}}
   </ion-card>
-
-
 
   <div *ngIf="activitiesData.length == 0">No Previous Activites!</div>
 </ion-content>

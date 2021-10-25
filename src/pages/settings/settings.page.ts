@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { FirebaseAuthService } from '../../app/services/firebase-auth.service'
-
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
@@ -10,9 +9,10 @@ import { Router } from '@angular/router';
   templateUrl: './settings.page.html',
   styleUrls: ['./settings.page.scss'],
 })
+
 export class SettingsPage implements OnInit {
+  // store the users details
   userDetails: FormGroup;
-  userData: any = {};
 
   constructor(
     private authService: FirebaseAuthService,
@@ -20,19 +20,21 @@ export class SettingsPage implements OnInit {
     private fb: FormBuilder,
     private loadingController: LoadingController
   ) {
+    // get the users details from the database
     authService.getUserDetails().subscribe(res => {
-      this.userData = res.data();
-      console.log(this.userData);
+      let userData: any = res.data();
+      // set the form details to the users details
       this.userDetails = this.fb.group({
-        firstName: [this.userData.firstName],
-        lastName: [this.userData.lastName],
-        distanceGoal: [this.userData.distanceGoal],
-        activitiesGoal: [this.userData.activitiesGoal]
+        firstName: [userData.firstName],
+        lastName: [userData.lastName],
+        distanceGoal: [userData.distanceGoal],
+        activitiesGoal: [userData.activitiesGoal]
       })
     });
   }
 
   ngOnInit() {
+    // set the user details form items
     this.userDetails = this.fb.group({
       firstName: [''],
       lastName: [''],
@@ -41,26 +43,34 @@ export class SettingsPage implements OnInit {
     })
   }
 
+  /*
+  * Update the users details
+  */
   async updateDetails() {
+    // show the loading bar as the data is being processed
     const loading = await this.loadingController.create();
     await loading.present();
 
+    // call the auth service to update the users details to the new details
     await this.authService.updateUserDetails(this.userDetails.value)
       .then(() => {
+        // if the update was successful, navigate to a new page
         loading.dismiss();
         this.router.navigate(['/tabs']);
       })
       .catch(() => {
+        // if the update wasn't successful, notify the user
         loading.dismiss();
         window.alert("Updating Details Failed")
       })
-
-    console.log("update");
   }
 
+  /*
+  * Logout the user
+  */
   logout() {
+    // call the methods to logout the user and navigate to the login page
     this.authService.signoutUser();
     this.router.navigate(['/login']);
   }
-
 }
