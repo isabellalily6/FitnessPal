@@ -10,11 +10,13 @@
   <div #map id="map"></div>
 
   <ion-fab *ngIf="!isTracking" horizontal="end" vertical="bottom" slot="fixed">
-    <ion-fab-button class="fab-button" color="danger" (click)="startTracking()">Start <br/> Tracking</ion-fab-button>
+    <ion-fab-button class="fab-button" color="danger" (click)="startTracking()">Start<br />
+      Tracking</ion-fab-button>
   </ion-fab>
 
   <ion-fab *ngIf="isTracking" horizontal="end" vertical="bottom" slot="fixed">
-    <ion-fab-button class="fab-button" color="danger" (click)="stopTracking()">Stop <br/> Tracking</ion-fab-button>
+    <ion-fab-button class="fab-button" color="danger" (click)="stopTracking()">Stop<br />
+      Tracking</ion-fab-button>
   </ion-fab>
 
 </ion-content>

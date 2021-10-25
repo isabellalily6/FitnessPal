@@ -1,12 +1,13 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>trackSummary</ion-title>
+    <ion-title>Activity Summary</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-button color="success" type="button" expand="block" (click)="saveTrack()">Save Activity</ion-button>
-  <ion-button color="danger" type="button" expand="block" [routerLink]="['/tabs/map-tracking']">Discard Activity</ion-button>
+  <ion-button color="success" type="button" class="button" expand="block" (click)="saveTrack()">Save Activity</ion-button>
+  <ion-button color="danger" type="button" class="button" expand="block" [routerLink]="['/tabs/map-tracking']">Discard Activity
+  </ion-button>
 
   <ion-card>
     <ion-card-header>
