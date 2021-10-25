@@ -9,9 +9,6 @@ FitnessPal is an application which allows users to track their daily activities 
 - Calculate information about activities such as distance travelled, and activity duration
 - View a summary of a users weekly activity
 
-### Authors: 
-Isabella Tomaz Ketley
-  
 ### Installation and Running
 To install and run FitnessPal, the following software is needed:
 - FitnessPal code, Node, Ionic Command Line Interface
