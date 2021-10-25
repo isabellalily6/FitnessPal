@@ -10,30 +10,30 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('../pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'register',
-    loadChildren: () => import('../pages/register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
   {
     path: 'tabs',
-    loadChildren: () => import('../pages/tabs/tabs.module').then(m => m.TabsPageModule),
+    loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule),
     canLoad: [AuthGuard]
   },
   {
     path: 'track-summary',
-    loadChildren: () => import('../pages/track-summary/track-summary.module').then( m => m.TrackSummaryPageModule),
+    loadChildren: () => import('./pages/track-summary/track-summary.module').then( m => m.TrackSummaryPageModule),
     canLoad: [AuthGuard]
   },
   {
     path: 'settings',
-    loadChildren: () => import('../pages/settings/settings.module').then( m => m.SettingsPageModule),
+    loadChildren: () => import('./pages/settings/settings.module').then( m => m.SettingsPageModule),
     canLoad: [AuthGuard]
   },
   {
     path: 'show-track',
-    loadChildren: () => import('../pages/show-track/show-track.module').then( m => m.ShowTrackPageModule),
+    loadChildren: () => import('./pages/show-track/show-track.module').then( m => m.ShowTrackPageModule),
     canLoad: [AuthGuard]
   },
 ];

@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { FirebaseAuthService } from '../../app/services/firebase-auth.service'
+import { FirebaseAuthService } from '../../services/firebase-auth.service'
 import Chart from 'chart.js/auto';
 import { LoadingController } from '@ionic/angular';
 
